@@ -51,6 +51,13 @@ def do_backup():
 if __name__ == '__main__':
 	global cur, log, error, dump_file
 
+	devnull = open("/dev/null", "r")
+	fileno = devnull.fileno()
+	os.dup2(fileno, 1)
+	os.dup2(fileno, 2)
+	os.dup2(fileno, 0)
+	devnull.close()
+
 	cur = int(time.time())
 	check_valid_dir()
 	check_permission()

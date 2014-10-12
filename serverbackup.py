@@ -9,7 +9,7 @@ prefix = "server_"
 compressor = '/bin/tar -cvpzf '
 query = compressor + "%(loc)s %(exclude)s %(target)s"
 exclude = ['/mnt', '/proc', '/lost+found', '/media', '/sys',  backup_dir]
-targets = ['/bin', '/boot', '/dev', '/etc', '/initrd', '/img', '/lib', '/lib32', '/lib64', '/libx32', '/opt', '/root', '/run', '/sbin', '/srv',  '/usr', '/var', '/vmlinuz'] 
+targets = ['/bin', '/boot', '/dev', '/etc', '/initrd.img', '/lib', '/lib32', '/lib64', '/libx32', '/opt', '/root', '/run', '/sbin', '/srv',  '/usr', '/var', '/vmlinuz'] 
 user_dir_backup = ['backups']
 maximum = 5
 

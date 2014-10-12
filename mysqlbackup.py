@@ -10,6 +10,16 @@ db_pw = ''
 query = "/usr/bin/mysqldump -u root -p" + db_pw +" --all-databases > %(loc)s"
 compressor = '/bin/gzip'
 
+def get_status() :
+    backups = filter(lambda x: ".sql.gz" in x, os.listdir(backup_dir))
+    backups.sort()
+    return (len(backups), backups[0] )
+
+def check_maximum():
+    (cur, old) = get_status()
+
+    if cur > maximum : os.system("rm -rf " + old)
+
 def get_current_time() :
 	return datetime.datetime.now().strftime("%Y-%m-%d %I:%M%p")
 
@@ -58,7 +68,7 @@ if __name__ == '__main__':
 		give_log("There was an error for handling " + dump_file)
 		report_error(dump_file + ": error occured: " + str(e))
 	
-
+        check_maximum()
 	error.close()
 	log.write("\n")
 	log.close()
